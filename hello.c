@@ -43,35 +43,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE 1024
+int main(int argc, char **argv) 
 
-int main(int argCount, char **argValue) 
 {
-    if (argCount < 3) {
-        fprintf(stderr, "Usage: %s input_file output_file\n", argValue[0]);
+    //the three args will be program name, input file, and output file 
+    if(argc == 3) {
+    //Opening input file and output file
+    FILE *input_f= fopen(argv[1], "read");
+    FILE *output_f = fopen(argv[2], "write");
+
+    //while byte is not at end of file (EOF) in input file keep writing to output file
+    int curr_byte;
+    while (
+        (curr_byte = fgetc(input_f)) != EOF) {
+        fputc(curr_byte, output_f);
+    }
+
+    fclose(input_f);
+    fclose(output_f);
+    }
+    else
+    {
+        perror("3 arguments must be passed in");
         exit(1);
     }
-
-    FILE *input_file = fopen(argValue[1], "read");
-    if (input_file == NULL) {
-        perror("Failed to read input_file");
-        exit(1);
-    }
-
-    FILE *output_file = fopen(argValue[2], "write");
-    if (output_file == NULL) {
-        perror("Failed to write to output_file");
-        exit(1);
-    }
-
-    char buffer[BUFFER_SIZE];
-    size_t bytes_read;
-    while ((bytes_read = fread(buffer, 1, BUFFER_SIZE, input_file)) > 0) {
-        fwrite(buffer, 1, bytes_read, output_file);
-    }
-
-    fclose(input_file);
-    fclose(output_file);
-
     return 0;
 }
