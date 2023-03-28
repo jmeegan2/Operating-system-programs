@@ -64,8 +64,16 @@ int main(int argc, char **argv)
     }
     else
     {
-        perror("3 arguments must be passed in");
-        exit(1);
+        printf("Enter three arguments\n");
+        // exit(1);
     }
     return 0;
 }
+
+// #include <stdio.h>
+// #include <unistd.h>
+
+// int main() {
+//     printf("Hello this is from the child process %d\n", getpid());
+//     return 0;
+// }
