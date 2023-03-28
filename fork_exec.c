@@ -29,7 +29,7 @@ int main() {
     pid_t wpid;
     while ((wpid = wait(&status)) > 0);
 
-    printf("All child processes have terminated. Parent process (PID %d) exiting.\n", getpid());
+    printf("All child processes have been terminated. Parent process (PID %d) exiting.\n", getpid());
 
     return 0;
 }
